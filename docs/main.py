@@ -165,13 +165,14 @@ class PygameWindow:
 
 
                         elif event.ui_element == self.home_screen.boost_health_button:
-                            print(f"boost_health button pressed by {self.home_screen.username}")
+                            self.home_screen.boost_attribute("health")
+                            print(f"Health boosted to {self.home_screen.attribute_values['health']}")
                         elif event.ui_element == self.home_screen.boost_strength_button:
-                            print(f"boost_strength button pressed by {self.home_screen.username}")
+                            self.home_screen.boost_attribute("strength")
                         elif event.ui_element == self.home_screen.boost_stamina_button:
-                            print(f"boost_stamina button pressed by {self.home_screen.username}")
+                            self.home_screen.boost_attribute("stamina")
                         elif event.ui_element == self.home_screen.boost_iq_button:
-                            print(f"boost_iq-level button pressed by {self.home_screen.username}")
+                            self.home_screen.boost_attribute("iq")
                         elif event.ui_element == self.home_screen.purpose_button:
                             print(f"purpose-level button pressed by {self.home_screen.username}")
                        
