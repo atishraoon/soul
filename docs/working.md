@@ -20,7 +20,6 @@
 - [ ] Set up database 
 - [ ] api servers
 
----
 
 ### Development
 - [ ] level generation
