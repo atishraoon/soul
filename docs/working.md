@@ -1,32 +1,47 @@
-# workings
+# Soul raw blue print
 
 ---
-
-**working**
-
-
-
 ---
 
+## working
+
+### 1. POST Request `username` , `password` ,`purpose / goal`.
+### 2. User creation .
+### 3. generations `levels` , `task`  .
+### 4. Prompting , viewing quests `tasks`
+### 5. Handling `taks and queries attached along with levels.json file`.
+### 6. Updating `goal / purpose`,`health` and `more` info display in window.
+### 7. continue steps `4`,`6`  untill all `levels` cleared. 
+### 8. game end `auto unnstall form system`. 
+
+---
+---
 
 ## Checklist
 
+---
+
 ### Setup
-- [✅] Install dependencies (`pip install -r requirements.txt`)
-- [✅] Configure environment variables (copy `.env.example` to `.env`)
-- [✅] Set up database 
+- [✅] Install dependencies 
+- [✅] Configure environment variables 
+- [ ] Set up database 
+- [ ] api servers
+
+---
 
 ### Development
-- [ ] Run development server (`npm run dev` / `python app.py`)
-- [ ] Write unit tests
-- [ ] Implement core features
-- [=] Add documentation
+- [ ] level generation
+- [ ] ui complition
+- [ ] api `create new user - purpose - key - progress`
+- [ ] optimization 
+
+---
 
 ### Deployment
-- [ ] Build production version (`npm run build` / etc.)
-- [ ] Configure production server
-- [ ] Set up CI/CD pipeline
-- [ ] Deploy to hosting platform
+- [ ] compile c++ code
+- [ ] configure all paths
+- [ ] api check
+- [ ] compile python code
 
 ### Maintenance
 - [ ] Update dependencies
