@@ -13,14 +13,14 @@
 
 ### Setup
 - [✅] Install dependencies (`pip install -r requirements.txt`)
-- [✅ ] Configure environment variables (copy `.env.example` to `.env`)
-- [✅ ] Set up database 
+- [✅] Configure environment variables (copy `.env.example` to `.env`)
+- [✅] Set up database 
 
 ### Development
 - [ ] Run development server (`npm run dev` / `python app.py`)
 - [ ] Write unit tests
 - [ ] Implement core features
-- [ ] Add documentation
+- [=] Add documentation
 
 ### Deployment
 - [ ] Build production version (`npm run build` / etc.)
