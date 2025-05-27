@@ -5,14 +5,14 @@
 
 ## working
 
-### 1. POST Request `username` , `password` ,`purpose / goal`.
-### 2. User creation .
-### 3. generations `levels` , `task`  .
-### 4. Prompting , viewing quests `tasks`
-### 5. Handling `taks and queries attached along with levels.json file`.
-### 6. Updating `goal / purpose`,`health` and `more` info display in window.
-### 7. continue steps `4`,`6`  untill all `levels` cleared. 
-### 8. game end `auto unnstall form system`. 
+ 1. POST Request `username` , `password` ,`purpose / goal`.
+ 2. User creation .
+ 3. generations `levels` , `task`  .
+ 4. Prompting , viewing quests `tasks`
+ 5. Handling `taks and queries attached along with levels.json file`.
+ 6. Updating `goal / purpose`,`health` and `more` info display in window.
+ 7. continue steps `4`,`6`  untill all `levels` cleared. 
+ 8. game end `auto unnstall form system`. 
 
 ---
 ---
