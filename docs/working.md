@@ -1,7 +1,7 @@
 # Soul raw blue print
 
 ---
----
+
 
 ## working
 
@@ -15,11 +15,11 @@
  8. game end `auto unnstall form system`. 
 
 ---
----
+
 
 ## Checklist
 
----
+
 
 ### Setup
 - [✅] Install dependencies 
@@ -35,7 +35,6 @@
 - [ ] api `create new user - purpose - key - progress`
 - [ ] optimization 
 
----
 
 ### Deployment
 - [ ] compile c++ code
