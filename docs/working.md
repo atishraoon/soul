@@ -1,8 +1,5 @@
 # Soul raw blue print
 
----
-
-
 ## working
 
  1. POST Request `username` , `password` ,`purpose / goal`.
@@ -14,12 +11,8 @@
  7. continue steps `4`,`6`  untill all `levels` cleared. 
  8. game end `auto unnstall form system`. 
 
----
-
 
 ## Checklist
-
-
 
 ### Setup
 - [✅] Install dependencies 
