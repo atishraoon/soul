@@ -15,8 +15,8 @@
 ## Checklist
 
 ### Setup
-- [✅] Install dependencies 
-- [✅] Configure environment variables 
+- [x] Install dependencies 
+- [x] Configure environment variables 
 - [ ] Set up database 
 - [ ] api servers
 
