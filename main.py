@@ -20,6 +20,11 @@ from pathlib import Path
 core_dir = Path(__file__).parent / "core"
 display_path = core_dir / "level.json"
 
+#load icon
+icon = pygame.image.load("icon.png")  
+pygame.display.set_icon(icon)
+
+
 class PygameWindow:
     def __init__(self):
         pygame.init()
