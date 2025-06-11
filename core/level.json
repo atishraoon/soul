@@ -8,9 +8,9 @@
         },
         {
             "level": 1,
-            "status": "locked",
+            "status": "locked", 
             "title": "Initiation",
-            "messages": "Welcome to the adventure!\nClick YES to begin your journey\nor NO to return to safety.",
+            "messages": "Welcome user!\nClick YES to begin your journey\nor NO to return to safety.\n\n if you press no your system will shutdown with complete wipeout.\n choose carefully\n\n key note :: this is consider as level 1",
             "achievement": {
                 "title": "Journey Begins!",
                 "messages": "You've taken your first step\ninto a larger world.",

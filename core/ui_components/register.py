@@ -1,8 +1,9 @@
 import pygame
 import pygame_gui
 
-class RegisterUI:
-    def __init__(self, manager, position, size, on_submit):
+
+class Register:
+    def __init__(self, manager, position, size, on_submit ):
         self.manager = manager
         self.on_submit = on_submit
         self.window = pygame_gui.elements.UIWindow(
@@ -51,7 +52,19 @@ class RegisterUI:
                     purpose = self.purpose_field.get_text()
                     username = self.username_field.get_text()
                     password = self.password_field.get_text()
-                    self.on_submit(purpose, username, password)
+                    if purpose and username and password: 
+                        if callable(self.on_submit):  
+                            self.on_submit(purpose, username, password) 
+
+                            
+    # def handle_events(self, event):
+    #     if event.type == pygame.USEREVENT:
+    #         if event.user_type == pygame_gui.UI_BUTTON_PRESSED:
+    #             if event.ui_element == self.submit_button:
+    #                 purpose = self.purpose_field.get_text()
+    #                 username = self.username_field.get_text()
+    #                 password = self.password_field.get_text()
+    #                 self.on_submit(purpose, username, password)
     
     def kill(self):
         self.window.kill()

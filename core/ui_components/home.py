@@ -1,9 +1,10 @@
 import pygame
 import pygame_gui
-from settings import *
+from ..settings import *
 
 class HomeScreen:
     def __init__(self, manager, screen_dimensions, username, current_level):
+        self.settings = Settings()
         self.manager = manager
         self.screen_width, self.screen_height = screen_dimensions
         self.username = username
@@ -151,11 +152,19 @@ class HomeScreen:
 
         self.boost_buttons = {}
         self.button_height = 30
+ 
         attributes = ["HEALTH", "STRENGTH", "STAMINA", "IQ"]
-        margin_left_right = 15  # New margin value
-
-        # Starting Y position (below buttons + status label + margin)
+        margin_left_right = 15
         current_y = 100 + button_height + 20 + 20 + 40
+
+        # Add this dictionary to track attribute values
+        self.attribute_values = {
+            "health": 50.0,  # Initialize health at 50
+            "strength": 10.0,
+            "stamina": 9.0,
+            "iq": 10.0
+        }
+
 
         for attr in attributes:
             # Create container panel with side margins
@@ -184,13 +193,15 @@ class HomeScreen:
             progress_bar = pygame_gui.elements.UIProgressBar(
                 relative_rect=pygame.Rect(
                     (130, 10),
-                    (self.screen_width - 300 - 2 * margin_left_right, 20)  # Adjust width
+                    (self.screen_width - 300 - 2 * margin_left_right, 20)
                 ),
                 manager=self.manager,
                 container=container
             )
             setattr(self, f"{attr.lower()}_bar", progress_bar)
-            progress_bar.set_current_progress(100)
+            
+            # Set initial progress from our dictionary
+            progress_bar.set_current_progress(self.attribute_values[attr.lower()])
 
             # Boost Button (position relative to container)
             boost_button = pygame_gui.elements.UIButton(
@@ -206,7 +217,6 @@ class HomeScreen:
             self.boost_buttons[attr.lower()] = boost_button
 
             current_y += 50
-
 
 
 # ------------------------------------- progress -----------------------------------------------
@@ -267,6 +277,10 @@ class HomeScreen:
         )
 
 
+
+
+
+
     # ---------------------------------- return buttons as reference -------------------------------------
 
   
@@ -305,24 +319,16 @@ class HomeScreen:
 
 
 
-
-
-
-# def update_health(self, health_percentage):
-#     """Update health bar with new percentage (0-100)"""
-#     self.health_bar.set_current_progress(health_percentage)
+# ----------------------------------------------- boost attributes -------------------------------
     
-#     # Change color based on health level
-#     if health_percentage < 20:
-#         bar_color = pygame.Color("#ff0000")  # Red
-#     elif health_percentage < 50:
-#         bar_color = pygame.Color("#ff9900")  # Orange
-#     else:
-#         bar_color = pygame.Color("#00cc00")  # Green
-    
-#     self.health_bar.set_colours(
-#         dark_colour=bar_color,
-#         light_colour=bar_color,
-#         shadow_colour=pygame.Color("#333333")
-#     )
+    def boost_attribute(self, attribute_name):
+        """Increase the specified attribute by 10 points (max 100)"""
+        if attribute_name in self.attribute_values:
+            new_value = min(100.0, self.attribute_values[attribute_name] + 10.0)
+            self.attribute_values[attribute_name] = new_value
+            getattr(self, f"{attribute_name}_bar").set_current_progress(new_value)
+            
+            # Update the label to show current/max (e.g. "60.0/100.0")
+            label = getattr(self, f"{attribute_name}_label")
+            # label.set_text(f"{attribute_name}: {new_value:.1f}/100.0")
 

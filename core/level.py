@@ -1,8 +1,9 @@
 import json 
-
+ 
 class LevelManager:
-    def __init__(self, json_file):
-        with open(json_file, 'r') as f:
+    def __init__(self, display_path):
+
+        with open(display_path, 'r') as f:
             self.data = json.load(f)
         self.current_level = 0  
     

@@ -37,7 +37,8 @@ ui/*.pyo
 
 # Ignore dependency folders
 node_modules/
-venv/
+
+env/
 .env/
 .DS_Store
 Thumbs.db
@@ -46,4 +47,9 @@ Thumbs.db
 logs/
 *.log
 debug.log
- 
+
+
+# PyInstaller output
+dist/
+build/
+*.spec
