@@ -1,0 +1,55 @@
+# Ignore Python-related files
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.log
+
+# Ignore Django-related files
+backend/db.sqlite3
+backend/media/
+backend/static/
+backend/.env
+*.sqlite3
+*.env
+
+# Ignore compiled C++ files
+core/build/
+core/*.o
+core/*.a
+core/*.out
+core/*.exe
+core/*.dll
+core/CMakeCache.txt
+core/CMakeFiles/
+core/Makefile
+core/cmake_install.cmake
+
+# Ignore Pygame cache and temporary files
+ui/__pycache__/
+ui/*.pyc
+ui/*.pyo
+
+# Ignore IDE/editor config files
+.vscode/
+.idea/
+*.sublime-workspace
+
+# Ignore dependency folders
+node_modules/
+
+env/
+.env/
+.DS_Store
+Thumbs.db
+
+# Ignore log and debug files
+logs/
+*.log
+debug.log
+
+
+# PyInstaller output
+dist/
+build/
+*.spec
