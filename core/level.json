@@ -4,7 +4,7 @@
             "level": 0,
             "type": "system",
             "title": "Warning!",
-            "messages": "Are you sure you want to quit?"
+            "messages": "Running requires commitment. Are you ready to begin your transformation?"
         },
         {
             "level": 1,
@@ -23,93 +23,228 @@
         },
         {
             "level": 2,
-            "status": "locked",
-            "title": "First Challenge",
-            "messages": "Complete a 1km run\nwithin 24 hours!",
+            "status": "unlocked", 
+            "title": "First Steps",
+            "messages": "Complete your first run/walk session:\n- 1 min running\n- 2 min walking\n- Repeat 5 times",
             "requirements": {
-                "prerequisites": [1],
-                "time_limit": 24
+                "duration": 15,
+                "frequency": "3x this week"
             },
             "achievement": {
-                "title": "First Milestone!",
-                "messages": "Your endurance is growing!\nKeep up the good work.",
+                "title": "Movement Initiated!",
+                "messages": "You've started your running journey!\nConsistency is key.",
                 "reward": {
-                    "xp": 250,
-                    "unlocks": ["running_gear"],
-                    "stats": {"stamina": 5}
+                    "xp": 100,
+                    "unlocks": ["running_log"],
+                    "items": ["digital_stopwatch"]
                 }
             }
         },
         {
             "level": 3,
             "status": "locked",
-            "title": "Knowledge Test",
-            "messages": "Answer 3 quiz questions\ncorrectly to proceed.",
+            "title": "Building Consistency",
+            "messages": "Complete 3 run/walk sessions this week:\n- 2 min running\n- 1 min walking\n- Repeat 5 times",
             "requirements": {
-                "prerequisites": [2],
-                "quiz": {
-                    "questions": 3,
-                    "topics": ["history", "science"]
-                }
+                "prerequisites": [1],
+                "duration": 15,
+                "frequency": "3x this week"
             },
             "achievement": {
-                "title": "Scholar Unlocked!",
-                "messages": "Your mind is sharp!\nKnowledge is power.",
+                "title": "Routine Established!",
+                "messages": "You're building running habit!\nYour body is adapting.",
                 "reward": {
-                    "xp": 400,
-                    "unlocks": ["library_access"],
-                    "stats": {"intelligence": 10}
+                    "xp": 200,
+                    "unlocks": ["pace_tracker"],
+                    "stats": {"stamina": 5}
                 }
             }
         },
         {
             "level": 4,
             "status": "locked",
-            "title": "Social Challenge",
-            "messages": "Make 3 new connections\nthis week.",
+            "title": "First Continuous Run",
+            "messages": "Run 1km without stopping\n(pace doesn't matter)",
             "requirements": {
-                "prerequisites": [3],
-                "social": {
-                    "connections": 3,
-                    "timeframe": "week"
-                }
+                "prerequisites": [2],
+                "distance": 1,
+                "continuous": true
             },
             "achievement": {
-                "title": "Social Butterfly!",
-                "messages": "Your network is expanding!\nGreat job being social.",
+                "title": "Non-Stop Runner!",
+                "messages": "You ran continuously!\nThis is a major milestone.",
                 "reward": {
-                    "xp": 500,
-                    "unlocks": ["networking_events"],
-                    "stats": {"charisma": 8}
+                    "xp": 300,
+                    "unlocks": ["hydration_tracker"],
+                    "stats": {"endurance": 8}
                 }
             }
         },
         {
             "level": 5,
             "status": "locked",
-            "title": "Final Challenge",
-            "messages": "Demonstrate all you've learned\nin a comprehensive test!",
+            "title": "Distance Challenge",
+            "messages": "Complete a 5km run/walk\n(any combination)",
             "requirements": {
-                "prerequisites": [4],
-                "comprehensive": true
+                "prerequisites": [3],
+                "distance": 5,
+                "time_limit": "1 week"
             },
             "achievement": {
-                "title": "Master Achieved!",
-                "messages": "You've completed all challenges!\nYou are now a true master.",
+                "title": "Distance Conqueror!",
+                "messages": "5km achieved!\nYou're building real endurance now.",
+                "reward": {
+                    "xp": 500,
+                    "unlocks": ["route_planner"],
+                    "items": ["hydration_belt"],
+                    "stats": {"stamina": 10}
+                }
+            }
+        },
+        {
+            "level": 6,
+            "status": "locked",
+            "title": "Speed Introduction",
+            "messages": "Complete interval training:\n- 400m fast run\n- 400m recovery jog\n- Repeat 3 times",
+            "requirements": {
+                "prerequisites": [4],
+                "workout": "interval",
+                "reps": 3
+            },
+            "achievement": {
+                "title": "Speed Demon!",
+                "messages": "You've experienced speed work!\nYour running is becoming versatile.",
+                "reward": {
+                    "xp": 600,
+                    "unlocks": ["speed_training"],
+                    "stats": {"speed": 5, "endurance": 5}
+                }
+            }
+        },
+        {
+            "level": 7,
+            "status": "locked",
+            "title": "Endurance Builder",
+            "messages": "Complete a 10km run\n(any pace)",
+            "requirements": {
+                "prerequisites": [5],
+                "distance": 10,
+                "time_limit": "2 weeks"
+            },
+            "achievement": {
+                "title": "Endurance Master!",
+                "messages": "Double digits achieved!\nYou're now a serious runner.",
+                "reward": {
+                    "xp": 800,
+                    "unlocks": ["long_run_plans"],
+                    "items": ["recovery_kit"],
+                    "stats": {"stamina": 15}
+                }
+            }
+        },
+        {
+            "level": 8,
+            "status": "locked",
+            "title": "Race Ready",
+            "messages": "Complete a timed 5km\nat your best effort!",
+            "requirements": {
+                "prerequisites": [6],
+                "distance": 5,
+                "timed": true
+            },
+            "achievement": {
+                "title": "Competitor!",
+                "messages": "You've tested your limits!\nConsider entering a real race.",
                 "reward": {
                     "xp": 1000,
-                    "unlocks": ["master_status"],
-                    "items": ["master_key", "champion_badge"],
-                    "stats": {
-                        "all_attributes": 15
-                    }
+                    "unlocks": ["race_finder"],
+                    "items": ["virtual_medal"],
+                    "stats": {"speed": 10, "confidence": 10}
                 }
             }
         }
     ],
-    "dailyquest":[
+    "dailyquest": [
         {
-            "level":0
+            "task": 1,
+            "title": "Morning Mobility",
+            "messages": "Complete 10 minutes of dynamic stretching\nbefore your day begins",
+            "timeframe": "morning",
+            "reward": {
+                "xp": 50,
+                "stats": {"flexibility": 2}
+            },
+            "penalty": {
+                "title": "Missed Mobility",
+                "messages": "Your joints will stiffen without movement",
+                "action": "Extra 5 minutes stretching tonight"
+            }
+        },
+        {
+            "task": 2,
+            "title": "Hydration Check",
+            "messages": "Drink at least 2L of water today\n(keep track!)",
+            "timeframe": "daily",
+            "reward": {
+                "xp": 30,
+                "stats": {"recovery": 3}
+            },
+            "penalty": {
+                "title": "Dehydration",
+                "messages": "Your performance will suffer tomorrow",
+                "action": "No caffeine until water quota met"
+            }
+        },
+        {
+            "task": 3,
+            "title": "Active Recovery",
+            "messages": "Take a 20-minute walk\non non-running days",
+            "timeframe": "evening",
+            "requirements": {
+                "rest_day": true
+            },
+            "reward": {
+                "xp": 40,
+                "stats": {"recovery": 5}
+            },
+            "penalty": {
+                "title": "Lazy Day",
+                "messages": "Recovery is part of training",
+                "action": "Double walk time tomorrow"
+            }
+        },
+        {
+            "task": 4,
+            "title": "Running Form Drill",
+            "messages": "Practice 5x20m of:\n- High knees\n- Butt kicks\n- Skipping",
+            "timeframe": "pre-run",
+            "requirements": {
+                "run_day": true
+            },
+            "reward": {
+                "xp": 60,
+                "stats": {"form": 3}
+            },
+            "penalty": {
+                "title": "Poor Form",
+                "messages": "Bad habits will develop",
+                "action": "Extra form drills next run"
+            }
+        },
+        {
+            "task": 5,
+            "title": "Reflection Log",
+            "messages": "Write 3 sentences about\nyour running progress",
+            "timeframe": "night",
+            "reward": {
+                "xp": 70,
+                "stats": {"mindset": 4}
+            },
+            "penalty": {
+                "title": "No Reflection",
+                "messages": "You won't notice your improvements",
+                "action": "Write 5 sentences tomorrow"
+            }
         }
     ]
 }
