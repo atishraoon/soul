@@ -50,4 +50,6 @@ pyinstaller --onefile --windowed --add-data "core/level.json;core" --add-data "c
 
 
 **other**
-- `--add-data "core/ui_components/*.py;core/ui_components`
+```sh
+ --add-data "core/ui_components/*.py;core/ui_components
+```
