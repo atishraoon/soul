@@ -1,15 +1,19 @@
 import pygame
 import pygame_gui
 from ..settings import *
-
+ 
 class HomeScreen:  
-    def __init__(self, manager, screen_dimensions, username, current_level, health):
+    def __init__(self, manager, screen_dimensions, username, current_level, health , purpose_reached , strength , stamina , iq):
         self.settings = Settings()
         self.manager = manager
         self.screen_width, self.screen_height = screen_dimensions
         self.username = username
         self.current_level = current_level
-        self.current_health = health  
+        self.current_health = health
+        self.current_strength = strength
+        self.current_stamina = stamina
+        self.current_iq = iq  
+        self.purpose_reached = purpose_reached 
         self.create_ui()
 
     def create_ui(self):
@@ -102,10 +106,10 @@ class HomeScreen:
         
         self.attribute_values = {
             "health": float(self.current_health),  
-            "strength": 10.0,
-            "stamina": 9.0,
-            "iq": 10.0,
-            "purpose": 0.0
+            "strength": float(self.current_strength), 
+            "stamina": float(self.current_stamina), 
+            "iq": float(self.current_iq),  
+            "purpose": float(self.purpose_reached)
         }
 
         for attr in attributes:
@@ -205,6 +209,9 @@ class HomeScreen:
             container=self.purpose_container
         )
 
+        # Set the initial purpose progress value
+        self.purpose_bar.set_current_progress(self.attribute_values["purpose"])
+
         # Purpose Button - fixed container reference and positioning
         self.purpose_button = pygame_gui.elements.UIButton(
             relative_rect=pygame.Rect(
@@ -214,7 +221,7 @@ class HomeScreen:
             text="Goal",
             manager=self.manager,
             container=self.purpose_container
-        )
+)
 
     # ---------------------------------- return buttons as reference -------------------------------------
     def get_purpose_button(self):

@@ -56,14 +56,27 @@ class PygameWindow:
         #load levels
         self.load_level_data()
 
-        self.health = 50.0
+        #player status
+        self.health = 10.0
+        self.current_strength = 10.0
+        self.current_stamina = 10.0
+        self.current_iq = 10.0
+        self.purpose_reached = float(self.current_level * 10)
  
    # ------------------------- home screen / kill other -----------------------------
 
-
-    def show_home_screen(self, username , health):
+ 
+    def show_home_screen(self):
         """Show the home screen with greeting"""
-        self.home_screen = HomeScreen(self.manager, (self.settings.WIDTH, self.settings.HEIGHT), username , self.current_level , self.health)
+        self.home_screen = HomeScreen(self.manager, (self.settings.WIDTH, self.settings.HEIGHT),
+         self.username,
+         self.current_level,
+         self.health,
+         self.purpose_reached,
+         self.current_strength,
+         self.current_stamina,
+         self.current_iq, 
+        )
         self.show_home_time = time.time()
         self.home_screen_active = True
 
@@ -112,7 +125,7 @@ class PygameWindow:
         self.in_register = False
         
         # Load next content after registration
-        self.show_home_screen(self.username,self.health) 
+        self.show_home_screen() 
              
 
    
