@@ -233,6 +233,7 @@ class PygameWindow:
             elif event.type == pygame_gui.UI_BUTTON_PRESSED and self.home_screen_active:
                 if event.ui_element == self.home_screen.get_daily_button():
                     print('"Daily" button clicked')
+                    self.load_level_data()
                 elif event.ui_element == self.home_screen.get_quest_button():
                     print('"Quest" button clicked')
                 elif event.ui_element == self.home_screen.get_inventory_button():
@@ -265,6 +266,14 @@ class PygameWindow:
                     elif result == "no":
                         print("you have to phase consequences for not compeleting level 1")
 
+
+                elif self.current_level == 2:
+                    if result == "yes":
+                        self.close_popup()  
+                        print('level accepted')
+                        self.current_level = 2                        
+                    elif result == "no":
+                        print("you so close to reaching penelty zone.")        
             # Always pass events to the UI manager
             self.manager.process_events(event)
 
