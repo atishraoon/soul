@@ -2,17 +2,17 @@ import pygame
 import pygame_gui
 from ..settings import *
 
-class HomeScreen:
-    def __init__(self, manager, screen_dimensions, username, current_level):
+class HomeScreen:  
+    def __init__(self, manager, screen_dimensions, username, current_level, health):
         self.settings = Settings()
         self.manager = manager
         self.screen_width, self.screen_height = screen_dimensions
         self.username = username
         self.current_level = current_level
+        self.current_health = health  
         self.create_ui()
 
     def create_ui(self):
-
         # ------------------------------------- nav bar ------------------------------------------------
 
         # Top left - Level indicator
@@ -47,10 +47,7 @@ class HomeScreen:
         # Set the line color to white
         self.line.background_colour = pygame.Color(255, 255, 255)
 
-
-
         # ----------------------------------------  all buttons ------------------------------------------
-
 
         # Calculate button positions (add this above button creation)
         button_width = 150
@@ -80,10 +77,7 @@ class HomeScreen:
                 manager=self.manager
             ))
 
-
-
-
-    # --------------------------------- profile status --------------------------------------------------
+        # --------------------------------- profile status --------------------------------------------------
 
         self.status_label = pygame_gui.elements.UILabel(
             relative_rect=pygame.Rect(
@@ -98,58 +92,6 @@ class HomeScreen:
             )
         )
 
-
-
-    # ---------------------------------- health bar -----------------------------------------------
-
-        # self.health_container = pygame_gui.elements.UIPanel(
-        #     relative_rect=pygame.Rect(
-        #         (0, 100 + button_height + 20 + 20 + 40),  # Below status label with 40px margin
-        #         (self.screen_width, 40)  # Reduced container height from 60 to 40
-        #     ),
-        #     manager=self.manager
-        # )
-
-        # # Health Label (smaller font size)
-        # self.health_label = pygame_gui.elements.UILabel(
-        #     relative_rect=pygame.Rect(
-        #         (20, 5),  # Adjusted vertical position
-        #         (100, 30)  # Reduced height
-        #     ),
-        #     text="HEALTH:",
-        #     manager=self.manager,
-        #     container=self.health_container
-        # )
-
-        # # Slim Health Progress Bar
-        # self.health_bar = pygame_gui.elements.UIProgressBar(
-        #     relative_rect=pygame.Rect(
-        #         (130, 10),  # Adjusted vertical position
-        #         (self.screen_width - 300, 20)  # Slimmer bar (height 20 instead of 40)
-        #     ),
-        #     manager=self.manager,
-        #     container=self.health_container
-        # )
-
-        # # Compact Boost Button
-        # self.boost_health_button = pygame_gui.elements.UIButton(
-        #     relative_rect=pygame.Rect(
-        #         (self.screen_width - 150, 5),  # Adjusted vertical position
-        #         (120, 30)  # More compact (height 30 instead of 40)
-        #     ),
-        #     text="BOOST",
-        #     manager=self.manager,
-        #     container=self.health_container
-        # )
-         
-                
-        # self.update_health(100)  # Default 100% health
-       
-        # self.update_health(75)  
-        
-        # self.update_health(min(100, current_health + 25))  # Adds 25% health
-
-
         self.boost_buttons = {}
         self.button_height = 30
  
@@ -157,14 +99,14 @@ class HomeScreen:
         margin_left_right = 15
         current_y = 100 + button_height + 20 + 20 + 40
 
-        # Add this dictionary to track attribute values
+        
         self.attribute_values = {
-            "health": 50.0,  # Initialize health at 50
+            "health": float(self.current_health),  
             "strength": 10.0,
             "stamina": 9.0,
-            "iq": 10.0
+            "iq": 10.0,
+            "purpose": 0.0
         }
-
 
         for attr in attributes:
             # Create container panel with side margins
@@ -218,8 +160,7 @@ class HomeScreen:
 
             current_y += 50
 
-
-# ------------------------------------- progress -----------------------------------------------
+        # ------------------------------------- progress -----------------------------------------------
         self.progress_label = pygame_gui.elements.UILabel(
             relative_rect=pygame.Rect(
                 (0, current_y + 10),  # Position below last attribute bar with 10px margin
@@ -233,8 +174,7 @@ class HomeScreen:
             )
         )
 
-
- # -------------------------------------- progress toward your goal --------------------------------
+        # -------------------------------------- progress toward your goal --------------------------------
 
         self.purpose_container = pygame_gui.elements.UIPanel(
             relative_rect=pygame.Rect(
@@ -252,7 +192,7 @@ class HomeScreen:
             ),
             text="PURPOSE REACHED:",
             manager=self.manager,
-            container=self.purpose_container  # Fixed: was health_container
+            container=self.purpose_container
         )
 
         # Purpose Progress Bar - adjusted width for container margins
@@ -262,7 +202,7 @@ class HomeScreen:
                 (self.purpose_container.rect.width - 310, 20)  # Accounts for both margins
             ),
             manager=self.manager,
-            container=self.purpose_container  # Fixed: was health_container
+            container=self.purpose_container
         )
 
         # Purpose Button - fixed container reference and positioning
@@ -273,17 +213,10 @@ class HomeScreen:
             ),
             text="Goal",
             manager=self.manager,
-            container=self.purpose_container  # Fixed: was health_container
+            container=self.purpose_container
         )
 
-
-
-
-
-
     # ---------------------------------- return buttons as reference -------------------------------------
-
-  
     def get_purpose_button(self):
         return self.purpose_button
 
@@ -305,22 +238,18 @@ class HomeScreen:
         return self.help_button
 
     def get_health_button(self):
-        return self.health_button
+        return self.boost_buttons["health"]
 
     def get_strength_button(self):
-        return self.strength_button
+        return self.boost_buttons["strength"]
 
     def get_stamina_button(self):
-        return self.stamina_button
+        return self.boost_buttons["stamina"]
 
     def get_iq_button(self):
-        return self.iq_button
+        return self.boost_buttons["iq"]
 
-
-
-
-# ----------------------------------------------- boost attributes -------------------------------
-    
+    # ----------------------------------------------- boost attributes -------------------------------
     def boost_attribute(self, attribute_name):
         """Increase the specified attribute by 10 points (max 100)"""
         if attribute_name in self.attribute_values:
@@ -331,4 +260,3 @@ class HomeScreen:
             # Update the label to show current/max (e.g. "60.0/100.0")
             label = getattr(self, f"{attribute_name}_label")
             # label.set_text(f"{attribute_name}: {new_value:.1f}/100.0")
-

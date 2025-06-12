@@ -56,14 +56,14 @@ class PygameWindow:
         #load levels
         self.load_level_data()
 
+        self.health = 50.0
  
-
    # ------------------------- home screen / kill other -----------------------------
 
 
-    def show_home_screen(self, username):
+    def show_home_screen(self, username , health):
         """Show the home screen with greeting"""
-        self.home_screen = HomeScreen(self.manager, (self.settings.WIDTH, self.settings.HEIGHT), username , self.current_level)
+        self.home_screen = HomeScreen(self.manager, (self.settings.WIDTH, self.settings.HEIGHT), username , self.current_level , self.health)
         self.show_home_time = time.time()
         self.home_screen_active = True
 
@@ -112,7 +112,7 @@ class PygameWindow:
         self.in_register = False
         
         # Load next content after registration
-        self.show_home_screen(self.username)
+        self.show_home_screen(self.username,self.health) 
              
 
    
@@ -214,39 +214,32 @@ class PygameWindow:
             # handel register ui popup event
             if hasattr(self, 'register_ui'):
                 self.register_ui.handle_events(event)
+    
+           
+            # Handle home screen button clicks
+            elif event.type == pygame_gui.UI_BUTTON_PRESSED and self.home_screen_active:
+                if event.ui_element == self.home_screen.get_daily_button():
+                    print('"Daily" button clicked')
+                elif event.ui_element == self.home_screen.get_quest_button():
+                    print('"Quest" button clicked')
+                elif event.ui_element == self.home_screen.get_inventory_button():
+                    print('"Inventory" button clicked')
+                elif event.ui_element == self.home_screen.get_skill_button():
+                    print('"Skill" button clicked')
+                elif event.ui_element == self.home_screen.get_help_button():
+                    print('"Help" button clicked')          
+                elif event.ui_element == self.home_screen.get_purpose_button():
+                    print('"Purpose" button clicked')    
 
-            # home screen window
-            elif self.home_screen_active:
-                if event.type == pygame.USEREVENT:
-                    if event.type == pygame_gui.UI_BUTTON_PRESSED:
-                        
-                        if event.ui_element == self.home_screen.daily_button:
-                            print(f"daily button pressed by {self.home_screen.username}")
-                        elif event.ui_element == self.home_screen.quest_button:
-                            print(f"quest button pressed by {self.home_screen.username}")
-                        elif event.ui_element == self.home_screen.inventory_button:
-                            print(f"inventory button pressed by {self.home_screen.username}")
-                        elif event.ui_element == self.home_screen.skill_button:
-                            print(f"skill button pressed by {self.home_screen.username}")
-                        elif event.ui_element == self.home_screen.help_button:
-                            print(f"help button pressed by {self.home_screen.username}")
+                # Handle attribute boost buttons
+                elif event.ui_element in self.home_screen.boost_buttons.values():
+                    for attr, button in self.home_screen.boost_buttons.items():
+                        if event.ui_element == button:
+                            print(f'"{attr.capitalize()}" boost button clicked')
+                            self.home_screen.boost_attribute(attr)
+                                                  
 
-
-                        elif event.ui_element == self.home_screen.boost_health_button:
-                            self.home_screen.boost_attribute("health")
-                            print(f"Health boosted to {self.home_screen.attribute_values['health']}")
-                        elif event.ui_element == self.home_screen.boost_strength_button:
-                            self.home_screen.boost_attribute("strength")
-                        elif event.ui_element == self.home_screen.boost_stamina_button:
-                            self.home_screen.boost_attribute("stamina")
-                        elif event.ui_element == self.home_screen.boost_iq_button:
-                            self.home_screen.boost_attribute("iq")
-                        elif event.ui_element == self.home_screen.purpose_button:
-                            print(f"purpose-level button pressed by {self.home_screen.username}")
-
-
-
-             
+                 
             # Handle popup button events
             if self.popup_window and isinstance(self.popup_window, PopupWindow):
                 result = self.popup_window.process_event(event)
