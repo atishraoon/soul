@@ -17,6 +17,13 @@ class LevelManager:
         self.current_level += 1
         return self.get_level_data(self.current_level)
 
+
+    def get_daily_data(self, daily):
+        for daily_data in self.data['dailyquest']:
+            if int(daily_data['task']) == daily:
+                return daily_data
+        return None
+
     
     def get_all_data(self):
         """Returns the complete JSON data loaded from the file"""

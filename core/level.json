@@ -167,7 +167,7 @@
     "dailyquest": [
         {
             "task": 1,
-            "title": "Morning Mobility",
+            "title": "daily task 1 : Morning Mobility",
             "messages": "Complete 10 minutes of dynamic stretching\nbefore your day begins",
             "timeframe": "morning",
             "reward": {
@@ -182,7 +182,7 @@
         },
         {
             "task": 2,
-            "title": "Hydration Check",
+            "title": "daily task 2 :Hydration Check",
             "messages": "Drink at least 2L of water today\n(keep track!)",
             "timeframe": "daily",
             "reward": {
@@ -197,7 +197,7 @@
         },
         {
             "task": 3,
-            "title": "Active Recovery",
+            "title": "daily task 3 :Active Recovery",
             "messages": "Take a 20-minute walk\non non-running days",
             "timeframe": "evening",
             "requirements": {
@@ -215,7 +215,7 @@
         },
         {
             "task": 4,
-            "title": "Running Form Drill",
+            "title": "daily task 4 :Running Form Drill",
             "messages": "Practice 5x20m of:\n- High knees\n- Butt kicks\n- Skipping",
             "timeframe": "pre-run",
             "requirements": {
@@ -233,7 +233,7 @@
         },
         {
             "task": 5,
-            "title": "Reflection Log",
+            "title": "daily task 5 :Reflection Log",
             "messages": "Write 3 sentences about\nyour running progress",
             "timeframe": "night",
             "reward": {

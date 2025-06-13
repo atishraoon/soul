@@ -45,6 +45,9 @@ class PygameWindow:
         self.attempt_count = 0 
         self.current_level = 1  
         self.next_level = self.current_level + 1
+        self.current_daily = 1   
+        self.next_daily = self.current_daily + 1
+
         self.current_popup_id = 0
         self.popup_window = None
         self.in_register = True
@@ -131,7 +134,7 @@ class PygameWindow:
    
 
 
-    # ----------------------------------- load level ----------------------------------    
+    # ---------------------------- load level / daily task --------------------    
 
     def create_popup_window(self, title, message):
         """Create a new popup window"""
@@ -148,6 +151,7 @@ class PygameWindow:
         )
         self.current_popup_id += 1
 
+    #load level     
     def load_level_data(self):
         """Load and display data for the current level"""
         level_data = self.level.get_level_data(self.current_level)
@@ -156,6 +160,18 @@ class PygameWindow:
                 title=level_data["title"],
                 message=level_data["messages"]
             )
+
+
+    #load daily task     
+    def load_daily_data(self):
+        """Load and display data for the current level"""
+        daily_data = self.level.get_daily_data(self.current_daily)
+        if daily_data:
+            self.create_popup_window(
+                title=daily_data["title"],
+                message=daily_data["messages"]
+            )        
+
 
 
             
@@ -233,7 +249,9 @@ class PygameWindow:
             elif event.type == pygame_gui.UI_BUTTON_PRESSED and self.home_screen_active:
                 if event.ui_element == self.home_screen.get_daily_button():
                     print('"Daily" button clicked')
-                    self.load_level_data()
+                    self.load_daily_data()
+                    self.current_daily = self.current_daily+1
+
                 elif event.ui_element == self.home_screen.get_quest_button():
                     print('"Quest" button clicked')
                 elif event.ui_element == self.home_screen.get_inventory_button():
@@ -257,6 +275,7 @@ class PygameWindow:
             # Handle popup button events
             if self.popup_window and isinstance(self.popup_window, PopupWindow):
                 result = self.popup_window.process_event(event)
+                # level handle
                 if self.current_level == 1:
                     if result == "yes":
                         self.close_popup()  
@@ -264,16 +283,20 @@ class PygameWindow:
                         self.create_register_popup()
                         self.current_level = 2                        
                     elif result == "no":
-                        print("you have to phase consequences for not compeleting level 1")
-
+                        print("fist warning") 
 
                 elif self.current_level == 2:
                     if result == "yes":
                         self.close_popup()  
-                        print('level accepted')
-                        self.current_level = 2                        
+                        print('level 2 accepted')
+                        self.current_level = 3                        
                     elif result == "no":
-                        print("you so close to reaching penelty zone.")        
+                        print("fail level 2")
+
+
+
+
+                                     
             # Always pass events to the UI manager
             self.manager.process_events(event)
 
