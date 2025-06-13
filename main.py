@@ -84,11 +84,43 @@ class PygameWindow:
         self.home_screen_active = True
 
     def hide_home_screen(self):
-        """Hide the home screen"""
+        """Hide the home screen and clean up all its UI elements"""
         if self.home_screen:
-            self.home_screen.welcome_label.kill()
-            self.home_screen.home_label.kill()
-            self.home_screen.greet_button.kill()
+            # Kill all main elements
+            if hasattr(self.home_screen, 'welcome_label'):
+                self.home_screen.welcome_label.kill()
+            if hasattr(self.home_screen, 'level_label'):
+                self.home_screen.level_label.kill()
+            if hasattr(self.home_screen, 'line'):
+                self.home_screen.line.kill()
+            
+            # Kill all buttons
+            button_names = [
+                'daily_button', 'quest_button', 'inventory_button',
+                'skill_button', 'help_button', 'purpose_button'
+            ]
+            for button_name in button_names:
+                if hasattr(self.home_screen, button_name):
+                    getattr(self.home_screen, button_name).kill()
+            
+            # Kill status label
+            if hasattr(self.home_screen, 'status_label'):
+                self.home_screen.status_label.kill()
+            
+            # Kill all attribute containers and their children
+            attributes = ['health', 'strength', 'stamina', 'iq']
+            for attr in attributes:
+                container_name = f"{attr}_container"
+                if hasattr(self.home_screen, container_name):
+                    getattr(self.home_screen, container_name).kill()
+            
+            # Kill progress elements
+            if hasattr(self.home_screen, 'progress_label'):
+                self.home_screen.progress_label.kill()
+            if hasattr(self.home_screen, 'purpose_container'):
+                self.home_screen.purpose_container.kill()
+            
+            # Clear references
             self.home_screen = None
             self.home_screen_active = False
 
@@ -275,6 +307,20 @@ class PygameWindow:
             # Handle popup button events
             if self.popup_window and isinstance(self.popup_window, PopupWindow):
                 result = self.popup_window.process_event(event)
+                 # Daily task handling
+                if self.current_daily > 1:  # Assuming daily tasks start from 1
+                    if result == "yes":
+                        print('daily task yes button clicked')
+                        self.close_popup()
+                        
+                    elif result == "no":
+                        print('daily task no button clicked')
+                        self.close_popup()
+                        self.health = self.health - 10.00
+                        self.hide_home_screen()
+                        self.show_home_screen()
+                        
+
                 # level handle
                 if self.current_level == 1:
                     if result == "yes":
@@ -292,8 +338,6 @@ class PygameWindow:
                         self.current_level = 3                        
                     elif result == "no":
                         print("fail level 2")
-
-
 
 
                                      
