@@ -199,7 +199,7 @@ class PygameWindow:
         """Load and display data for the current level"""
         daily_data = self.level.get_daily_data(self.current_daily)
         if daily_data:
-            self.create_popup_window(
+            self.create_alert_popup(
                 title=daily_data["title"],
                 message=daily_data["messages"]
             )        
