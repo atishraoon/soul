@@ -17,12 +17,13 @@ from core.ui_components.home import HomeScreen
 
 #load level file
 from pathlib import Path
-# core_dir = Path(__file__).parent / "core"
+core_dir = Path(__file__).parent / "core"
 # display_path = core_dir / "level.json"
 display_path = "core/level.json" 
 
-#load icon
-icon = pygame.image.load("icon.png")  
+#load icon 
+icon_path = core_dir / "icon.png"
+icon = pygame.image.load(icon_path)  
 pygame.display.set_icon(icon)
 
 
