@@ -65,11 +65,15 @@ class PygameWindow:
         self.current_stamina = 10.0
         self.current_iq = 10.0
         self.purpose_reached = float(self.current_level * 10)
+
+
+        self.completed_dailies = [] 
  
    # ------------------------- home screen / kill other -----------------------------
 
  
     def show_home_screen(self):
+
         """Show the home screen with greeting"""
         self.home_screen = HomeScreen(self.manager, (self.settings.WIDTH, self.settings.HEIGHT),
          self.username,
@@ -79,6 +83,7 @@ class PygameWindow:
          self.current_strength,
          self.current_stamina,
          self.current_iq, 
+        
         )
         self.show_home_time = time.time()
         self.home_screen_active = True
@@ -205,6 +210,10 @@ class PygameWindow:
             )        
 
 
+    def reset_daily_tasks(self):
+        self.completed_dailies = []
+        self.current_daily = 1
+
 
             
     # ------------------------------ on quit ------------------------------------------
@@ -280,12 +289,22 @@ class PygameWindow:
             # Handle home screen button clicks
             elif event.type == pygame_gui.UI_BUTTON_PRESSED and self.home_screen_active:
                 if event.ui_element == self.home_screen.get_daily_button():
-                    print('"Daily" button clicked')
-                    self.load_daily_data()
-                    self.current_daily = self.current_daily+1
+                    if self.current_daily <= 5:  # Assuming 5 daily tasks
+                        self.load_daily_data()
+                        self.current_daily += 1
+                    else:
+                        self.create_alert_popup(
+                            title="All Tasks Completed",
+                            message="You've completed all daily tasks for today!\n"
+                                    "Come back tomorrow for new tasks."
+                        )
 
                 elif event.ui_element == self.home_screen.get_quest_button():
                     print('"Quest" button clicked')
+                    self.load_level_data()
+                    self.current_level += 1
+                    
+
                 elif event.ui_element == self.home_screen.get_inventory_button():
                     print('"Inventory" button clicked')
                 elif event.ui_element == self.home_screen.get_skill_button():
@@ -305,21 +324,34 @@ class PygameWindow:
 
                  
             # Handle popup button events
+            if self.popup_window and isinstance(self.popup_window, AlertPopup):
+                    if self.current_daily not in self.completed_dailies:                        
+                        self.completed_dailies.append(self.current_daily)
+                        if len(self.completed_dailies) == 5:  # All tasks done
+                            self.create_alert_popup(
+                                title="Congratulations!",
+                                message="You've completed all daily tasks!\n"
+                                        "The quest button is now active."
+                            )
+                          # Move to next task
+
             if self.popup_window and isinstance(self.popup_window, PopupWindow):
                 result = self.popup_window.process_event(event)
                  # Daily task handling
-                if self.current_daily > 1:  # Assuming daily tasks start from 1
-                    if result == "yes":
-                        print('daily task yes button clicked')
-                        self.close_popup()
+                if self.current_daily > 1:  
+                    pass
+                    # if result == "yes":
+                    #     print('daily task yes button clicked')
+                    #     self.close_popup()
                         
-                    elif result == "no":
-                        print('daily task no button clicked')
-                        self.close_popup()
-                        self.health = self.health - 10.00
-                        self.hide_home_screen()
-                        self.show_home_screen()
-                        
+                    # elif result == "no":
+                    #     print('daily task no button clicked')
+                    #     self.close_popup()
+                    #     self.health = self.health - 10.00
+                    #     self.hide_home_screen()
+                    #     self.show_home_screen()
+
+                                        
 
                 # level handle
                 if self.current_level == 1:
