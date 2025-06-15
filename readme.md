@@ -13,7 +13,7 @@ Soul is not just a game—it's a transformative experience that combines AI supp
 ✅ **Consistency & Discipline** – Build unstoppable habits  
 ✅ **Real-World Task Integration** – Earn progress by completing actual life objectives  
 
----
+--- 
 
 ## 🔐 Security & Consequences  
 
@@ -25,3 +25,7 @@ Soul is not just a game—it's a transformative experience that combines AI supp
 
 ### 🚀 Ready to Transform Your Life?  
 **Play *Soul*—where goals become reality.**  
+
+
+### 🚀 key note?  
+**Play *Soul*— currently for those who want to become good athelete.**

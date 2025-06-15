@@ -3,6 +3,7 @@ import time
 import os
 import pygame
 import pygame_gui
+import webbrowser
 
 #settings , packages , dll files 
 from core.settings import Settings
@@ -19,7 +20,7 @@ from core.ui_components.home import HomeScreen
 from pathlib import Path
 core_dir = Path(__file__).parent / "core"
 # display_path = core_dir / "level.json"
-display_path = "core/level.json" 
+display_path = "core/level.json"  
 
 #load icon 
 icon_path = core_dir / "icon.png"
@@ -70,6 +71,7 @@ class PygameWindow:
 
 
         self.completed_dailies = [] 
+        self.clicked_boost_buttons = set()
  
    # ------------------------- home screen / kill other -----------------------------
 
@@ -258,6 +260,7 @@ class PygameWindow:
     # ---------------------------------------- all events --------------------------
    
     def handle_events(self):
+        boostactive = 1  
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.show_quit_warning()
@@ -298,7 +301,7 @@ class PygameWindow:
                         self.create_alert_popup(
                             title="All Tasks Completed",
                             message="You've completed all daily tasks for today!\n"
-                                    "Come back tomorrow for new tasks."
+                                    "Come back tomorrow for repeat these tasks."
                         )
 
                 elif event.ui_element == self.home_screen.get_quest_button():
@@ -323,20 +326,43 @@ class PygameWindow:
 
                 elif event.ui_element == self.home_screen.get_inventory_button():
                     print('"Inventory" button clicked')
+                    self.close_popup()
+                    self.create_alert_popup(
+                                title="notice!",
+                                message="This feature will locked!\n"
+                                        "."
+                            )
                 elif event.ui_element == self.home_screen.get_skill_button():
-                    print('"Skill" button clicked')
+                    print('skill button clicked')
+                    self.close_popup()
+                    self.create_alert_popup(
+                                title="notice!",
+                                message="This feature will locked!\n"
+                                        "."
+                            )
                 elif event.ui_element == self.home_screen.get_help_button():
-                    print('"Help" button clicked')          
+                    print('help button clicked')
+                    self.close_popup()
+                    self.create_alert_popup(
+                                title="notice!", 
+                                message="link : soulworld.game \n\n"
+                                "GO to help section and fill the form!\n"
+                                "To get any type of help."
+                            )         
+               
                 elif event.ui_element == self.home_screen.get_purpose_button():
                     print('"Purpose" button clicked')    
 
                 # Handle attribute boost buttons
                 elif event.ui_element in self.home_screen.boost_buttons.values():
                     for attr, button in self.home_screen.boost_buttons.items():
-                        if event.ui_element == button:
+                        if event.ui_element == button and attr not in self.clicked_boost_buttons:
                             print(f'"{attr.capitalize()}" boost button clicked')
                             if self.current_daily >= 3:
-                                self.home_screen.boost_attribute(attr)
+                                for i in range(boostactive):
+                                    self.home_screen.boost_attribute(attr)
+                                self.clicked_boost_buttons.add(attr)  
+                                button.disable()  
                             else:
                                 pass                                                  
 
@@ -345,7 +371,7 @@ class PygameWindow:
             if self.popup_window and isinstance(self.popup_window, AlertPopup):
                     if self.current_daily not in self.completed_dailies:                        
                         self.completed_dailies.append(self.current_daily)
-                        if len(self.completed_dailies) == 5:  # All tasks done
+                        if len(self.completed_dailies) == 6:  
                             self.create_alert_popup(
                                 title="Congratulations!",
                                 message="You've completed all daily tasks!\n"
@@ -355,9 +381,9 @@ class PygameWindow:
 
             if self.popup_window and isinstance(self.popup_window, PopupWindow):
                 result = self.popup_window.process_event(event)
-                 # Daily task handling
-                if self.current_daily > 1:  
-                    pass
+                # Daily task handling
+                # if self.current_daily > 1:  
+                #     pass
                     # if result == "yes":
                     #     print('daily task yes button clicked')
                     #     self.close_popup()
@@ -385,57 +411,78 @@ class PygameWindow:
                     if result == "yes":
                         self.close_popup()  
                         print('level 2 accepted')
-                        self.current_level = 3                        
+                        self.current_level = 3
+                        
+                                          
                     elif result == "no":
                         print("fail level 2")
+                        self.close_popup()
 
                 elif self.current_level == 3:
                     if result == "yes":
                         self.close_popup()  
                         print('level 3 accepted')
+                        self.hide_home_screen()
+                        self.show_home_screen()
                         self.current_level = 3                        
                     elif result == "no":
-                        print("fail level 2")
+                        print("fail level 3")
+                        self.close_popup()
 
                 elif self.current_level == 4:
                     if result == "yes":
                         self.close_popup()  
                         print('level 4 accepted')
+                        self.hide_home_screen()
+                        self.show_home_screen()
                         self.current_level = 5                        
                     elif result == "no":
-                        print("fail level 2")
+                        print("fail level 4")
+                        self.close_popup()
 
                 elif self.current_level == 5:
                     if result == "yes":
                         self.close_popup()  
                         print('level 5 accepted')
+                        self.hide_home_screen()
+                        self.show_home_screen()
                         self.current_level = 6                        
                     elif result == "no":
-                        print("fail level 2")
+                        print("fail level 5")
+                        self.close_popup()
 
                 elif self.current_level == 6:
                     if result == "yes":
                         self.close_popup()  
                         print('level 6 accepted')
+                        self.hide_home_screen()
+                        self.show_home_screen()
                         self.current_level = 7                        
                     elif result == "no":
-                        print("fail level 2")
+                        print("fail level 6")
+                        self.close_popup()
 
                 elif self.current_level == 7:
                     if result == "yes":
                         self.close_popup()  
                         print('level 7 accepted')
+                        self.hide_home_screen()
+                        self.show_home_screen()
                         self.current_level = 8                        
                     elif result == "no":
-                        print("fail level 2")
+                        print("fail level 7")
+                        self.close_popup()
 
                 elif self.current_level == 8:
                     if result == "yes":
                         self.close_popup()  
                         print('level 8 accepted')
+                        self.hide_home_screen()
+                        self.show_home_screen()
                         self.current_level = 9                        
                     elif result == "no":
-                        print("fail level 2")
+                        print("fail level 8")
+                        self.close_popup()
 
 
 
