@@ -43,7 +43,7 @@ pyinstaller main.spec
 **replicate command success 100%**
 
 ```sh
-pyinstaller --onefile --windowed --add-data "core/level.json;core" --add-data "core;core" --add-data "env/Lib/site-packages/pygame_gui/data;pygame_gui/data" main.py
+pyinstaller --onefile --windowed --icon=env/icon.ico --add-data "core/level.json;core" --add-data "core;core" --add-data "env/Lib/site-packages/pygame_gui/data;pygame_gui/data" main.py
 
 ```
 
